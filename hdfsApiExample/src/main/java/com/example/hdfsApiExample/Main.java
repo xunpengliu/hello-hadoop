@@ -32,7 +32,7 @@ public class Main extends Configured implements Tool {
         orderMap.put("cp", CopyOrderHandler.class);
         orderMap.put("ls", LsDirOrderHandler.class);
 
-        if ("-help".equals(args[0])) {
+        if (args.length == 0 || "-help".equals(args[0])) {
             printHelp();
             return 0;
         }
