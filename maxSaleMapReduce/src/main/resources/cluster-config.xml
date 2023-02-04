@@ -1,0 +1,28 @@
+<configuration>
+    <!--  跨平台提交  -->
+    <property>
+        <name>mapreduce.app-submission.cross-platform</name>
+        <value>true</value>
+    </property>
+    <!--  文件系统地址  -->
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://192.168.0.200:8082/</value>
+    </property>
+    <!--  资源管理器位置  -->
+    <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <value>192.168.0.200</value>
+    </property>
+    <!--  执行框架  -->
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+    <!--  map任务数量  -->
+    <property>
+        <name>mapreduce.job.maps</name>
+        <value>5</value>
+    </property>
+
+</configuration>
