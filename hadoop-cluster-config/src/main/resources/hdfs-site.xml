@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!-- 配置namenode数据存储目录 多个逗号分割-->
+  <property>
+    <name>dfs.namenode.name.dir</name>
+    <value>/data1/debian/hadoop-data/namenode-data</value>
+  </property>
+  <!-- 配置辅助namenode数据存储目录 多个逗号分割-->
+  <property>
+    <name>dfs.namenode.checkpoint.dir</name>
+    <value>/data1/debian/hadoop-data/namenode-checkpoint-data</value>
+  </property>
+  <!-- namenode rpc绑定主机地址 -->
+  <property>
+    <name>dfs.namenode.rpc-bind-host</name>
+    <value>0.0.0.0</value>
+  </property>
+
+  <!-- 配置datanode数据存储目录 多个逗号分割 -->
+  <property>
+    <name>dfs.datanode.data.dir</name>
+    <value>/data1/debian/hadoop-data/datanode-data</value>
+  </property>
+  <!-- 数据副本数 -->
+  <property>
+    <name>dfs.replication</name>
+    <value>1</value>
+  </property>
+</configuration>

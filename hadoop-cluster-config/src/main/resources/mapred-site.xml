@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+  <!-- 历史任务IPC地址 -->
+  <property>
+    <name>mapreduce.jobhistory.address</name>
+    <value>${my.jobhistory.host}:10020</value>
+  </property>
+  <!-- 历史任务web服务地址 -->
+  <property>
+    <name>mapreduce.jobhistory.webapp.address</name>
+    <value>${my.jobhistory.host}:19888</value>
+  </property>
+</configuration>

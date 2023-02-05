@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+  <!-- 当前主机地址，修改成Linux-1或Linux-2实际的IP地址 -->
+  <property>
+    <name>my.host</name>
+    <value>192.168.0.200</value>
+  </property>
+  <!-- dfs namenode所在地址 -->
+  <property>
+    <name>my.namenode.host</name>
+    <value>192.168.0.200</value>
+  </property>
+  <!-- yarn 资源管理器所在地址 -->
+  <property>
+    <name>my.resourcemanager.host</name>
+    <value>192.168.0.200</value>
+  </property>
+  <!-- 作业历史所在地址 -->
+  <property>
+    <name>my.jobhistory.host</name>
+    <value>192.168.0.200</value>
+  </property>
+
+  <!-- 文件系统地址 -->
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://${my.namenode.host}:8082/</value>
+  </property>
+</configuration>

@@ -11,6 +11,7 @@
         <module>maxSaleMapReduce</module>
         <module>common</module>
         <module>hdfsApiExample</module>
+        <module>hadoop-cluster-config</module>
     </modules>
     <packaging>pom</packaging>
 
