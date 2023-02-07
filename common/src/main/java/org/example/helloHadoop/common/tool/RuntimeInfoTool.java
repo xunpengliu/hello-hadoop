@@ -13,7 +13,10 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
 /**
  * 运行时信息工具。可以获取当前进程id，主类信息
@@ -30,6 +33,7 @@ public class RuntimeInfoTool {
                 if (data == null) {
                     RuntimeInfoEntity.RuntimeInfoEntityBuild build = RuntimeInfoEntity.createBuild();
                     build.setMainClass(getMainClass())
+                            .setArgs(getArgs())
                             .setStartTime(getStartTime())
                             .setPid(getPid());
                     data = build.build();
@@ -39,11 +43,27 @@ public class RuntimeInfoTool {
 
         RuntimeInfoEntity.RuntimeInfoEntityBuild build = RuntimeInfoEntity.createBuild();
         build.setMainClass(data.getMainClass())
+                .setArgs(data.getArgs())
                 .setStartTime(data.getStartTime())
                 .setPid(data.getPid())
                 .setIpv4(getIpv4());
 
         return build.build();
+    }
+
+    private static String[] getArgs() {
+        Object mainClassName = System.getProperties().get("sun.java.command");
+        if (mainClassName != null) {
+            String s = mainClassName.toString();
+            String[] split = s.split(" ");
+            if (split.length == 1) {
+                return new String[0];
+            }
+            String[] args = new String[split.length - 1];
+            System.arraycopy(split, 1, args, 0, args.length);
+            return args;
+        }
+        return new String[0];
     }
 
     /**
@@ -101,7 +121,8 @@ public class RuntimeInfoTool {
     private static String getMainClass() {
         Object mainClassName = System.getProperties().get("sun.java.command");
         if (mainClassName != null) {
-            return mainClassName.toString();
+            String s = mainClassName.toString();
+            return s.split(" ")[0];
         }
 
         return foundMainClassByStackTraces();

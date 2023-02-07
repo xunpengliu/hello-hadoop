@@ -8,6 +8,10 @@ public class RuntimeInfoEntity {
      */
     private String mainClass;
     /**
+     * 运行参数
+     */
+    private String[] args;
+    /**
      * 启动时间
      */
     private Date startTime;
@@ -25,6 +29,12 @@ public class RuntimeInfoEntity {
 
     public String getMainClass() {
         return mainClass;
+    }
+
+    public String[] getArgs() {
+        String[] args = new String[this.args.length];
+        System.arraycopy(this.args, 0, args, 0, args.length);
+        return args;
     }
 
     public Date getStartTime() {
@@ -49,6 +59,7 @@ public class RuntimeInfoEntity {
         public RuntimeInfoEntity build() {
             RuntimeInfoEntity data = new RuntimeInfoEntity();
             data.mainClass = entity.mainClass;
+            data.args = entity.args;
             data.startTime = entity.startTime;
             data.pid = entity.pid;
             data.ipv4 = entity.ipv4;
@@ -57,6 +68,13 @@ public class RuntimeInfoEntity {
 
         public RuntimeInfoEntityBuild setMainClass(String mainClass) {
             entity.mainClass = mainClass;
+            return this;
+        }
+        public RuntimeInfoEntityBuild setArgs(String[] args) {
+            if (args != null) {
+                entity.args = new String[args.length];
+                System.arraycopy(args, 0, entity.args, 0, args.length);
+            }
             return this;
         }
 
