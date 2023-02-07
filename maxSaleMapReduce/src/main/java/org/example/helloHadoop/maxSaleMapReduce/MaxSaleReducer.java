@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 /**
  * 查找每一个用户的最大销售值
@@ -26,11 +27,22 @@ public class MaxSaleReducer extends Reducer<LongWritable, IntWritable, LongWrita
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             startTime = sdf.format(runInfo.getStartTime());
         }
-        logger.info("reducer task,ip->{},startTime->{},mainClass->{},pid->{}",
+        logger.info("reducer task setup,ip->{},startTime->{},mainClass->{},pid->{}",
                 runInfo.getIpv4(),
                 startTime,
                 runInfo.getMainClass(),
                 runInfo.getPid());
+    }
+
+    @Override
+    protected void cleanup(Context context) throws IOException, InterruptedException {
+        super.cleanup(context);
+        RuntimeInfoEntity runInfo = RuntimeInfoTool.getRunInfo();
+        logger.info("reducer task cleanup,ip->{},pid->{},mainClass->{},args->{}",
+                runInfo.getIpv4(),
+                runInfo.getPid(),
+                runInfo.getMainClass(),
+                Arrays.toString(runInfo.getArgs()));
     }
 
     @Override

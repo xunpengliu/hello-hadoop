@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 /**
  * 解析输入的文本数据
@@ -31,11 +32,23 @@ public class MaxSaleMapper extends Mapper<LongWritable, Text, LongWritable, IntW
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             startTime = sdf.format(runInfo.getStartTime());
         }
-        logger.info("mapper task,ip->{},startTime->{},mainClass->{},pid->{}",
+        logger.info("mapper task setup,ip->{},startTime->{},pid->{},mainClass->{},args->{}",
                 runInfo.getIpv4(),
                 startTime,
+                runInfo.getPid(),
                 runInfo.getMainClass(),
-                runInfo.getPid());
+                Arrays.toString(runInfo.getArgs()));
+    }
+
+    @Override
+    protected void cleanup(Context context) throws IOException, InterruptedException {
+        super.cleanup(context);
+        RuntimeInfoEntity runInfo = RuntimeInfoTool.getRunInfo();
+        logger.info("mapper task cleanup,ip->{},pid->{},mainClass->{},args->{}",
+                runInfo.getIpv4(),
+                runInfo.getPid(),
+                runInfo.getMainClass(),
+                Arrays.toString(runInfo.getArgs()));
     }
 
     @Override
